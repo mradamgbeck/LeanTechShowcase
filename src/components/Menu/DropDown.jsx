@@ -9,26 +9,32 @@ export default function DropDown({ callBack }) {
 
   useEffect(() => {
     const getAlbumIds = async () => {
-      const { data } = await axios(`${BASE_URL}/albums`);
-      setAlbumData({ ...albumData, albums: data });
+      try {
+        console.log("Retreiving Album list...");
+        const { data } = await axios.get(`${BASE_URL}/albums`);
+        setAlbumData({ ...albumData, albums: data });
+      } catch (error) {
+        console.log(`Could not retreive album data: ${error}`);
+      }
+      return () => {};
     };
     getAlbumIds();
-  });
+  }, []);
 
   return (
     <div className="dropDown">
       <p>Choose an album: </p>
-      <select name="albums" id="albums">
+      <select data-testid="select" name="albums" id="albums">
         {albumData.albums &&
-          albumData.albums.map((albumDatum) => (
+          albumData.albums.map((album) => (
             <option
-              key={albumDatum.id}
-              value={albumDatum.id}
+              key={album.id}
+              value={album.id}
               onClick={() => {
-                callBack(albumDatum);
+                callBack(album);
               }}
             >
-              {albumDatum.id}
+              {album.id}
             </option>
           ))}
       </select>

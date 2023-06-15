@@ -24,7 +24,7 @@ export default function Album({ albumId }) {
       }
     };
     getPhotos();
-  });
+  }, [albumId]);
 
   return (
     <div className="album">
