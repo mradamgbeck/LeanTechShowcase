@@ -4,6 +4,8 @@ This project was made for Lean Techniques, and is a React Application that reach
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+I've al;so deployed a running version on Heroku [here](https://lean-tech-showcase-826c97f2418c.herokuapp.com/)
+
 ## Available Scripts
 
 In the project directory, you can run:
