@@ -6,17 +6,20 @@ export default function DropDown({ callBack }) {
   const [albumData, setAlbumData] = useState({
     albums: [],
   });
+  const getData = async () => {
+    let data = await axios.get(`${BASE_URL}/albums`);
+    return data;
+  };
 
   useEffect(() => {
     const getAlbumIds = async () => {
       try {
         console.log("Retreiving Album list...");
-        const { data } = await axios.get(`${BASE_URL}/albums`);
+        const { data } = await getData();
         setAlbumData({ ...albumData, albums: data });
       } catch (error) {
         console.log(`Could not retreive album data: ${error}`);
       }
-      return () => {};
     };
     getAlbumIds();
   }, []);
